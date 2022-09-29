@@ -14,3 +14,8 @@ export interface INFTCollection {
   items: Item[];
   id: string;
 }
+
+export type CollectionsParamsType = {
+  page?: number;
+  limit?: number;
+};
