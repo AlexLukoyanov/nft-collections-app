@@ -1,1 +1,1 @@
-export * as nftCollectionsApi from "./nft-collections";
+export * as nftCollectionsApi from "./nft-collections-api";

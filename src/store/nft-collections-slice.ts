@@ -3,7 +3,7 @@ import { nftCollectionsApi } from "../shared/api";
 import {
   CollectionsParamsType,
   INFTCollection,
-} from "../shared/api/nft-collections";
+} from "../shared/api/nft-collections-api";
 
 export const fetchCollections = createAsyncThunk(
   "nft-collections/fetchCollections",

@@ -1,14 +1,24 @@
-import { StatusBar } from "expo-status-bar";
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, View, StatusBar } from "react-native";
 import { Provider } from "react-redux";
+import { NFTCollectionsPage } from "./src/pages/nft-collections-page";
 import { store } from "./src/store";
+import { useFonts } from "expo-font";
 
 export default function App() {
+  const [fontsLoaded] = useFonts({
+    "poppins-regular": require("./assets/fonts/Poppins-Regular.ttf"),
+    "poppins-bold": require("./assets/fonts/Poppins-SemiBold.ttf"),
+  });
+
+  if (!fontsLoaded) {
+    return null;
+  }
+
   return (
     <Provider store={store}>
       <View style={styles.container}>
-        <Text>NFT Collections</Text>
-        <StatusBar style="auto" />
+        <StatusBar barStyle={"light-content"} />
+        <NFTCollectionsPage />
       </View>
     </Provider>
   );
@@ -17,8 +27,10 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#fff",
+    backgroundColor: "#05071B",
     alignItems: "center",
     justifyContent: "center",
+
+    paddingVertical: 20,
   },
 });
