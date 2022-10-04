@@ -1,15 +1,36 @@
 import { INFTCollection } from "../../../shared/api/nft-collections-api";
-import { Text, View, StyleSheet, Dimensions, Image } from "react-native";
+import {
+  Text,
+  View,
+  StyleSheet,
+  Dimensions,
+  Image,
+  NativeSyntheticEvent,
+  NativeScrollEvent,
+} from "react-native";
+import { useState } from "react";
+import { Slider } from "../../../shared/ui/slider";
 
 type NFTItemProps = {
   item: INFTCollection;
 };
 
 export const NFTCollection = ({ item }: NFTItemProps) => {
+  const [isActive, setIsActive] = useState(0);
+  const onScrollHandler = (e: NativeSyntheticEvent<NativeScrollEvent>) => {
+    if (e.nativeEvent) {
+      const slide = Math.ceil(
+        e.nativeEvent.contentOffset.x / e.nativeEvent.layoutMeasurement.width
+      );
+      if (slide !== isActive) {
+        setIsActive(slide);
+      }
+    }
+  };
   return (
     <View style={styles.container}>
       <View style={styles.wrapper}>
-        <Image style={styles.image} source={{ uri: item.creator_pic }} />
+        <Image style={styles.avatar} source={{ uri: item.creator_pic }} />
         <View>
           <Text style={styles.userName}>{item.creator_name}</Text>
           <View style={styles.priceContainer}>
@@ -22,6 +43,7 @@ export const NFTCollection = ({ item }: NFTItemProps) => {
           </View>
         </View>
       </View>
+      <Slider items={item.items} />
     </View>
   );
 };
@@ -36,7 +58,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 8,
     paddingVertical: 12,
   },
-  image: {
+  avatar: {
     width: 40,
     height: 40,
     borderRadius: 50,
