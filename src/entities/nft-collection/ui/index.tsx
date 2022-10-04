@@ -1,13 +1,5 @@
 import { INFTCollection } from "../../../shared/api/nft-collections-api";
-import {
-  Text,
-  View,
-  StyleSheet,
-  Dimensions,
-  Image,
-  NativeSyntheticEvent,
-  NativeScrollEvent,
-} from "react-native";
+import { Text, View, StyleSheet, Dimensions, Image } from "react-native";
 import { useState } from "react";
 import { Slider } from "../../../shared/ui/slider";
 
@@ -16,17 +8,7 @@ type NFTItemProps = {
 };
 
 export const NFTCollection = ({ item }: NFTItemProps) => {
-  const [isActive, setIsActive] = useState(0);
-  const onScrollHandler = (e: NativeSyntheticEvent<NativeScrollEvent>) => {
-    if (e.nativeEvent) {
-      const slide = Math.ceil(
-        e.nativeEvent.contentOffset.x / e.nativeEvent.layoutMeasurement.width
-      );
-      if (slide !== isActive) {
-        setIsActive(slide);
-      }
-    }
-  };
+  const [activeSlide, setActiveSlide] = useState<number>(0);
   return (
     <View style={styles.container}>
       <View style={styles.wrapper}>
@@ -38,12 +20,22 @@ export const NFTCollection = ({ item }: NFTItemProps) => {
               source={require("../../../../assets/img/rhombus.png")}
               style={{ width: 8, height: 12 }}
             />
-            <Text style={styles.priceEth}>8.2</Text>
-            <Text style={styles.priceUsd}>($79.078)</Text>
+            <Text style={styles.priceEth}>
+              {item.items[activeSlide] ? item.items[activeSlide].price_eth : 0}
+            </Text>
+            <Text style={styles.priceUsd}>
+              ($
+              {item.items[activeSlide] ? item.items[activeSlide].price_usd : 0})
+            </Text>
           </View>
         </View>
       </View>
-      <Slider items={item.items} />
+      <Slider
+        items={item.items}
+        activeSlide={activeSlide}
+        setActiveSlide={setActiveSlide}
+        collectionUrl={item.collection_url}
+      />
     </View>
   );
 };

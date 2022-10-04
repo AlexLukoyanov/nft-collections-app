@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import {
   NativeScrollEvent,
   NativeSyntheticEvent,
@@ -8,25 +8,44 @@ import {
   Image,
   StyleSheet,
   Dimensions,
+  TouchableOpacity,
+  Linking,
 } from "react-native";
 import { Item } from "../../../api/nft-collections-api/models";
+import { ButtonUi } from "../../button";
 
 type SliderProps = {
   items: Item[];
+  activeSlide: number;
+  setActiveSlide: (number: number) => void;
+  collectionUrl?: string;
 };
 
-export const Slider = ({ items }: SliderProps) => {
-  const [isActive, setIsActive] = useState(0);
+export const Slider = ({
+  items,
+  activeSlide,
+  collectionUrl,
+  setActiveSlide,
+}: SliderProps) => {
   const onScrollHandler = (e: NativeSyntheticEvent<NativeScrollEvent>) => {
     if (e.nativeEvent) {
       const slide = Math.ceil(
         e.nativeEvent.contentOffset.x / e.nativeEvent.layoutMeasurement.width
       );
-      if (slide !== isActive) {
-        setIsActive(slide);
+      if (slide !== activeSlide) {
+        setActiveSlide(slide);
       }
     }
   };
+
+  const openUrl = async (url: string) => {
+    if (url === "") {
+      return null;
+    } else {
+      return await Linking.openURL(url);
+    }
+  };
+
   return (
     <View style={styles.slider}>
       <ScrollView
@@ -36,14 +55,37 @@ export const Slider = ({ items }: SliderProps) => {
         horizontal
         scrollEventThrottle={17}
       >
-        <View style={styles.image}>
-          <Text style={{ color: "white" }}> First slide</Text>
-        </View>
-        {items.map((el) => (
-          <View key={el.name} style={styles.image}>
-            <Image style={styles.image} source={{ uri: el.image }} />
+        {items.slice(0, 4).map((el) => (
+          <View key={el.name} style={styles.imageContainer}>
+            <TouchableOpacity
+              activeOpacity={1}
+              onPress={() => openUrl(el.item_url)}
+            >
+              <Image style={styles.imageContainer} source={{ uri: el.image }} />
+            </TouchableOpacity>
           </View>
         ))}
+        <View style={styles.collageContainer}>
+          <View style={styles.collage}>
+            {items.map((el, i) => (
+              <Image
+                style={styles.collageItem}
+                source={{ uri: el.image }}
+                key={i}
+              />
+            ))}
+          </View>
+          <View style={styles.wrapper}>
+            <Text style={styles.text}>
+              Browse all NFTs from this collection
+            </Text>
+            <ButtonUi
+              onPress={() => openUrl(collectionUrl ? collectionUrl : "")}
+            >
+              Browse collection
+            </ButtonUi>
+          </View>
+        </View>
       </ScrollView>
       <View style={styles.pagination}>
         {Array(items.length + 1)
@@ -51,7 +93,7 @@ export const Slider = ({ items }: SliderProps) => {
           .map((_, i) => (
             <View
               key={i}
-              style={isActive === i ? styles.dotActive : styles.dot}
+              style={activeSlide === i ? styles.dotActive : styles.dot}
             />
           ))}
       </View>
@@ -63,9 +105,38 @@ const styles = StyleSheet.create({
   slider: {
     alignItems: "center",
   },
-  image: {
+  imageContainer: {
     width: Dimensions.get("window").width,
     height: 390,
+  },
+  collageContainer: {
+    width: Dimensions.get("window").width,
+    height: 390,
+  },
+  collage: {
+    width: Dimensions.get("window").width,
+    height: 390,
+    flexDirection: "row",
+    flexWrap: "wrap",
+  },
+  collageItem: {
+    color: "white",
+    width: Dimensions.get("window").width / 2,
+    height: "50%",
+  },
+  wrapper: {
+    position: "absolute",
+    width: Dimensions.get("window").width,
+    height: 390,
+    backgroundColor: "rgba(5, 7, 27, 0.75)",
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  text: {
+    fontFamily: "poppins-bold",
+    fontSize: 39,
+    color: "#FFFFFF",
+    textAlign: "center",
   },
   pagination: {
     width: 80,
