@@ -1,11 +1,4 @@
-import {
-  Text,
-  View,
-  StyleSheet,
-  Dimensions,
-  Image,
-  Linking,
-} from "react-native";
+import { Text, StyleSheet } from "react-native";
 
 type DescriptionProps = {
   text: string;
