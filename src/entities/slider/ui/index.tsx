@@ -1,3 +1,5 @@
+import { Item } from "@src/shared/api/nft-collections-api";
+import { ButtonUi } from "@src/shared/ui/button";
 import React from "react";
 import {
   NativeScrollEvent,
@@ -11,8 +13,6 @@ import {
   TouchableOpacity,
   Linking,
 } from "react-native";
-import { Item } from "../../../shared/api/nft-collections-api/models";
-import { ButtonUi } from "../../../shared/ui/button";
 
 type SliderProps = {
   items: Item[];

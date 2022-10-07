@@ -1,8 +1,8 @@
 import { StyleSheet, View, StatusBar } from "react-native";
 import { Provider } from "react-redux";
-import { NFTCollectionsPage } from "./src/pages/nft-collections-page";
 import { store } from "./src/store";
 import { useFonts } from "expo-font";
+import { NFTCollectionsPage } from "@src/pages/nft-collections-page";
 
 export default function App() {
   const [fontsLoaded] = useFonts({

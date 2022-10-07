@@ -1,8 +1,8 @@
+import { useAppDispatch, useAppSelector } from "@src/shared/hooks";
+import { fetchCollections } from "@src/store/nft-collections-slice";
+import { NFTCollection } from "@src/widgets/nft-collection";
 import React, { useEffect } from "react";
-import { View, Text, FlatList, Dimensions } from "react-native";
-import { useAppDispatch, useAppSelector } from "../../../shared/hooks";
-import { fetchCollections } from "../../../store/nft-collections-slice";
-import { NFTCollection } from "../../../widgets/nft-collection";
+import { View, FlatList, Dimensions } from "react-native";
 
 export const NFTCollectionsPage = () => {
   const dispatch = useAppDispatch();

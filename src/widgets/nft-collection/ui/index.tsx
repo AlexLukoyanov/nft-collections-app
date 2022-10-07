@@ -1,20 +1,13 @@
-import { INFTCollection } from "../../../shared/api/nft-collections-api";
-import {
-  Text,
-  View,
-  StyleSheet,
-  Dimensions,
-  Image,
-  Linking,
-} from "react-native";
+import { View, StyleSheet, Dimensions, Image, Linking } from "react-native";
 import React, { useState } from "react";
-import { Slider } from "../../../entities/slider";
-import { ButtonUi } from "../../../shared/ui/button";
-import { Description } from "../../../entities/description/ui";
-import { Avatar } from "../../../entities/avatar/ui";
-import { UserName } from "../../../entities/user-name/ui";
-import { PriceEth } from "../../../entities/price-eth";
-import { PriceUsd } from "../../../entities/price-usd";
+import { INFTCollection } from "@src/shared/api/nft-collections-api";
+import { Avatar } from "@src/entities/avatar";
+import { UserName } from "@src/entities/user-name";
+import { PriceEth } from "@src/entities/price-eth";
+import { PriceUsd } from "@src/entities/price-usd";
+import { Slider } from "@src/entities/slider";
+import { Description } from "@src/entities/description";
+import { ButtonUi } from "@src/shared/ui/button";
 
 type NFTItemProps = {
   item: INFTCollection;

@@ -1,9 +1,9 @@
 import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { nftCollectionsApi } from "../shared/api";
+import { nftCollectionsApi } from "@src/shared/api";
 import {
   CollectionsParamsType,
   INFTCollection,
-} from "../shared/api/nft-collections-api";
+} from "@src/shared/api/nft-collections-api";
 
 export const fetchCollections = createAsyncThunk(
   "nft-collections/fetchCollections",
