@@ -11,8 +11,8 @@ import {
   TouchableOpacity,
   Linking,
 } from "react-native";
-import { Item } from "../../../api/nft-collections-api/models";
-import { ButtonUi } from "../../button";
+import { Item } from "../../../shared/api/nft-collections-api/models";
+import { ButtonUi } from "../../../shared/ui/button";
 
 type SliderProps = {
   items: Item[];
@@ -104,18 +104,20 @@ export const Slider = ({
 const styles = StyleSheet.create({
   slider: {
     alignItems: "center",
+    width: Dimensions.get("window").width,
+    height: Dimensions.get("window").height / 2,
   },
   imageContainer: {
     width: Dimensions.get("window").width,
-    height: 390,
+    height: Dimensions.get("window").height / 2,
   },
   collageContainer: {
     width: Dimensions.get("window").width,
-    height: 390,
+    height: Dimensions.get("window").height / 2,
   },
   collage: {
     width: Dimensions.get("window").width,
-    height: 390,
+    height: Dimensions.get("window").height / 2,
     flexDirection: "row",
     flexWrap: "wrap",
   },
@@ -141,7 +143,7 @@ const styles = StyleSheet.create({
   pagination: {
     width: 80,
     position: "absolute",
-    bottom: 15,
+    bottom: "3%",
     flexDirection: "row",
     justifyContent: "space-between",
   },

@@ -31,7 +31,12 @@ export const ButtonUi = ({
         }}
       >
         <Text
-          style={{ fontSize: fontSize, color: color, fontFamily: fontFamily }}
+          style={{
+            fontSize: fontSize,
+            color: color,
+            fontFamily: fontFamily,
+            textAlign: "center",
+          }}
         >
           {children}
         </Text>
