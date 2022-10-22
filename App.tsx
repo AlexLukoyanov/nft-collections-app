@@ -17,7 +17,7 @@ export default function App() {
   return (
     <Provider store={store}>
       <View style={styles.container}>
-        <StatusBar barStyle={"light-content"} />
+        <StatusBar barStyle="light-content" backgroundColor="#05071B" />
         <NFTCollectionsPage />
       </View>
     </Provider>
