@@ -116,9 +116,7 @@ export const NFTCollection = ({ item, translateY, index }: NFTItemProps) => {
           colors={["#1FECFC", "#1fedfcc4", "#1fedfc29", "transparent"]}
           start={{ x: 0, y: 0 }}
           end={{ x: 0, y: 0.5 }}
-        >
-          <Text style={styles.text}>Scroll for next gem</Text>
-        </LinearGradient>
+        />
       </Animated.View>
     </View>
   );
@@ -151,13 +149,5 @@ const styles = StyleSheet.create({
     width: Dimensions.get("window").width,
     height: 500,
     marginTop: 10,
-  },
-  text: {
-    color: "#FFFFFF",
-    fontFamily: "poppins-bold",
-    fontSize: 14,
-    lineHeight: 18,
-    textAlign: "center",
-    marginTop: 18,
   },
 });

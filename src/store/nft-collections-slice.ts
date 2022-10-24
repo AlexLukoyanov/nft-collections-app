@@ -9,7 +9,7 @@ export const fetchCollections = createAsyncThunk(
   "nft-collections/fetchCollections",
   async (params: CollectionsParamsType, thunkApi) => {
     try {
-      const response = await nftCollectionsApi.getAllCollections(params);
+      const response = await nftCollectionsApi.getCollections(params);
       return response.data;
     } catch (e) {
       return thunkApi.rejectWithValue("Error loading NFT collections");

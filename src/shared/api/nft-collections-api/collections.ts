@@ -4,7 +4,7 @@ import { apiInstance } from "./base";
 
 const BASE_URL = "api/v1/items?";
 
-export const getAllCollections = (
+export const getCollections = (
   params: CollectionsParamsType
 ): AxiosPromise<INFTCollection[]> => {
   return apiInstance.get(BASE_URL, { params });
